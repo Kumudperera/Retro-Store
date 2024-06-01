@@ -1,10 +1,4 @@
-import {
-  CircleUser,
-  Home,
-  Menu,
-  Package2,
-  ShoppingCart
-} from "lucide-react";
+import { CircleUser, Home, Menu, Package2, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
@@ -20,7 +14,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Fragment } from "react";
 
 import { DashboardSidebarItem } from "@/components/@retroStore/common/DashboardSidebarItem";
-import RetroStoreBreadcrumb from "@/components/@retroStore/common/RSBreadcrumb";
+import RSBreadcrumbAndTitle from "@/components/@retroStore/common/RSBreadcrumbAndTitle";
 import { navigationConfigs } from "./navigationConfigs";
 
 const DashboardSidebarItems = () => {
@@ -107,7 +101,7 @@ export default function RetroStoreLayout(layoutProps: any) {
           </DropdownMenu>
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-          <RetroStoreBreadcrumb />
+          <RSBreadcrumbAndTitle />
           {children}
         </main>
       </div>

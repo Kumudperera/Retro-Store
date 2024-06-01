@@ -6,3 +6,7 @@ export type DashboardSidebarItemProps = {
   icon: ReactNode;
   badge?: number;
 };
+
+export type RSBreadcrumbAndTitleProps = {
+  showTitle?: boolean;
+}

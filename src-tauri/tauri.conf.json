@@ -12,7 +12,15 @@
   },
   "tauri": {
     "allowlist": {
-      "all": false
+      "all": false,
+      "fs": {
+        "readDir": true,
+        "createDir": true
+      },
+      "dialog": {
+        "save": true,
+        "open": true
+      }
     },
     "bundle": {
       "active": true,
@@ -56,10 +64,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 600,
-        "resizable": true,
-        "title": "Back your files",
-        "width": 800
+        "height": 750,
+        "title": "Retro Store",
+        "width": 1000,
+        "resizable": true
       }
     ]
   }

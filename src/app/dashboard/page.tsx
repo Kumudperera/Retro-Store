@@ -3,5 +3,5 @@ import { navigationConfigs } from "./navigationConfigs";
 
 export default function Dashboard(props: PageProps) {
   props.params.configs = navigationConfigs.dashboard;
-  return <div>Dashboard</div>;
+  return <div></div>;
 }
