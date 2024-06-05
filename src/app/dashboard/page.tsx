@@ -1,7 +1,8 @@
+import Constants from "@/utils/constants";
 import { PageProps } from "../../../.next/types/app/layout";
-import { navigationConfigs } from "./navigationConfigs";
+
 
 export default function Dashboard(props: PageProps) {
-  props.params.configs = navigationConfigs.dashboard;
+  props.params.configs = Constants.PAGES.DASHBOARD;
   return <div></div>;
 }

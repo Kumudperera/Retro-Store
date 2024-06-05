@@ -1,9 +1,9 @@
-import { SelectedFolderAction, SelectedFoldersData } from "../@types";
-import { DispatchAction } from "@/lib/@types";
+import { SelectedFolderAction, SelectedFolderAddEditData } from "../../@types";
+import { DispatchAction, MasterDataAction } from "@/common/@types";
 import Constants from "@/utils/constants";
 
-const readerAnnouncementReducer = (
-  state: SelectedFoldersData,
+const SelectedFolderReducer = (
+  state: SelectedFolderAddEditData,
   action: DispatchAction,
 ) => {
   switch (action.type) {
@@ -39,6 +39,12 @@ const readerAnnouncementReducer = (
         searchData: { ...action.payload },
       };
     }
+    case MasterDataAction.GET_ALL_EXECUTION_PERIODS: {
+      return {
+        ...state,
+        periods: action.payload,
+      };
+    }
 
     case SelectedFolderAction.ON_RESET_SEARCH: {
       return {
@@ -63,4 +69,4 @@ const readerAnnouncementReducer = (
   }
 };
 
-export default readerAnnouncementReducer;
+export default SelectedFolderReducer;

@@ -22,7 +22,7 @@ export class ExecutionPeriod {
   }
 }
 
-export class ChooseFolderDTO {
+export class SelectedFolderDTO {
   public selected_folder: string;
   public execution_period_id: string;
   public execution_time: any;

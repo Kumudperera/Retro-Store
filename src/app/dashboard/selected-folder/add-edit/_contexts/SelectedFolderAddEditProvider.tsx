@@ -2,18 +2,16 @@
 import React, { createContext, ReactNode, useContext, useMemo } from "react";
 
 import { useReducerWithThunk } from "@/hooks/use-reducer-thunk";
-import chooseFolderReducer from "./SelectedFolderReducer";
-import { SelectedFoldersData } from "../@types";
+import SelectedFolderReducer from "./SelectedFolderAddEditReducer";
+import { SelectedFolderAddEditData } from "../../@types";
 
-const initialData: SelectedFoldersData = {
-  page_info: {
-    page: 1,
-    rows: 5,
-  },
+const initialData: SelectedFolderAddEditData = {
+  selected_folder: undefined,
+  periods: []
 };
 
-const SelectedFolderSearchContext = createContext<{
-  state: SelectedFoldersData;
+const SelectedFolderAddEditContext = createContext<{
+  state: SelectedFolderAddEditData;
   dispatch: React.Dispatch<any>;
 }>({
   state: initialData,
@@ -26,7 +24,7 @@ export const SelectedFolderSearchProvider = ({
   children: ReactNode;
 }) => {
   const [state, dispatch] = useReducerWithThunk(
-    chooseFolderReducer,
+    SelectedFolderReducer,
     initialData,
   );
 
@@ -36,11 +34,11 @@ export const SelectedFolderSearchProvider = ({
   );
 
   return (
-    <SelectedFolderSearchContext.Provider value={contextValue}>
+    <SelectedFolderAddEditContext.Provider value={contextValue}>
       {children}
-    </SelectedFolderSearchContext.Provider>
+    </SelectedFolderAddEditContext.Provider>
   );
 };
 
-export const useSelectedFolderSearch = () =>
-  useContext(SelectedFolderSearchContext);
+export const useSelectedFolderAddEdit = () =>
+  useContext(SelectedFolderAddEditContext);

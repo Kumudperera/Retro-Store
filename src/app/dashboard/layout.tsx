@@ -15,19 +15,19 @@ import { Fragment } from "react";
 
 import { DashboardSidebarItem } from "@/components/@retroStore/common/DashboardSidebarItem";
 import RSBreadcrumbAndTitle from "@/components/@retroStore/common/RSBreadcrumbAndTitle";
-import { navigationConfigs } from "./navigationConfigs";
+import Constants from "@/utils/constants";
 
 const DashboardSidebarItems = () => {
   return (
     <Fragment>
       <DashboardSidebarItem
         item="Dashboard"
-        url={navigationConfigs.dashboard.route}
+        url={Constants.PAGES.DASHBOARD}
         icon={<Home className="h-4 w-4" />}
       />
       <DashboardSidebarItem
         item="Choose Folder"
-        url={navigationConfigs.chooseFolder.route}
+        url={Constants.PAGES.SELECTED_FOLDER}
         icon={<ShoppingCart className="h-4 w-4" />}
         badge={6}
       />
@@ -49,7 +49,7 @@ export default function RetroStoreLayout(layoutProps: any) {
         <div className="flex h-full max-h-screen flex-col gap-2">
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
             <Link
-              href={navigationConfigs.dashboard.route}
+              href={Constants.PAGES.DASHBOARD}
               className="flex items-center gap-2 font-semibold"
             >
               <Package2 className="h-6 w-6" />

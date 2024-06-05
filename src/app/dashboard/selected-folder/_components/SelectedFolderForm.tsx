@@ -35,7 +35,7 @@ import { Folders, RotateCcwIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { ChooseFolderDTO, ExecutionPeriod } from "../../@types";
+import { SelectedFolderDTO, ExecutionPeriod } from "../../@types";
 
 const formSchema = z.object({
   selected_folder: z.string().min(1, {
@@ -52,11 +52,11 @@ export default function SelectedFolderForm() {
   const [periods, setPeriods] = useState<ExecutionPeriod[]>([]);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: new ChooseFolderDTO(),
+    defaultValues: new SelectedFolderDTO(),
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    const chooseFolderDTO = new ChooseFolderDTO(values);
+    const chooseFolderDTO = new SelectedFolderDTO(values);
     chooseFolderDTO.execution_time = getDefaultFormattedDateTime(
       getMomentDateFromJSDate(values.execution_time),
     );

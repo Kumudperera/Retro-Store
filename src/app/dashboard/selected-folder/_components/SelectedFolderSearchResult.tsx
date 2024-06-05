@@ -8,11 +8,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import AppPagination from "@/components/pagination/AppPagination";
-import { PageInfo } from "@/lib/@types";
+import RetroStorePagination from "@/components/pagination/RetroStorePagination";
+import { PageInfo } from "@/common/@types";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { useSelectedFolderSearch } from "../../contexts/SelectedFolderSearchProvider";
-import { SelectedFolderAction } from "../../@types";
+import { useSelectedFolderSearch } from "../_contexts/SelectedFolderSearchProvider";
+import { SelectedFolderAction } from "../@types";
 /* import {
   getUserAnnouncementByID,
   toggleFullSearchView,
@@ -34,7 +34,7 @@ export default function SelectedFolderSearchResult() {
     dispatch(toggleFullSearchView(false));
   }; */
 
-  const pagedSelectedFolders = state.pagedSelectedFolders;
+  const pagedSelectedFolders = state.paged_selected_folders;
   const hasData =
     pagedSelectedFolders?.page_data && pagedSelectedFolders?.page_data.length > 0;
 
@@ -92,7 +92,7 @@ export default function SelectedFolderSearchResult() {
               ))}
             </TableBody>
           </Table>
-          <AppPagination
+          <RetroStorePagination
             current_page={pagedSelectedFolders.current_page}
             total_pages={pagedSelectedFolders.total_pages}
             page_length={pagedSelectedFolders.page_length}

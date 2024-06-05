@@ -24,3 +24,17 @@ export interface DispatchAction {
   payload: any;
 }
 
+
+export class RouteConfig {
+  route: string;
+  show_title: boolean;
+
+  constructor(data?: any) {
+    this.route = data.route || '';
+    this.show_title = data.show_title || false;
+  }
+}
+
+export enum MasterDataAction {
+  GET_ALL_EXECUTION_PERIODS = "GET_ALL_EXECUTION_PERIODS",
+}

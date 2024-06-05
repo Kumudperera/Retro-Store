@@ -6,14 +6,14 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { PageInfo, AppPagination } from "@/lib/@types";
+import { PageInfo, AppPagination } from "@/common/@types";
 import { useEffect, useState } from "react";
 
 interface Pagination extends AppPagination {
   onPaginationChange: (data: PageInfo) => void;
 }
 
-function AppPagination(props: Pagination) {
+function RetroStorePagination(props: Pagination) {
   const [pageLength, setPageLength] = useState(10);
   const [paginationArray, setPaginationArray] = useState<number[] | never[]>(
     [],
@@ -108,4 +108,4 @@ function AppPagination(props: Pagination) {
   );
 }
 
-export default AppPagination;
+export default RetroStorePagination;

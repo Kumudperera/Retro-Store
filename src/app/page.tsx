@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Constants from "@/utils/constants";
 import Link from "next/link";
 export default function Home() {
   return (
@@ -21,7 +22,7 @@ export default function Home() {
               </p>
               <Button className="mt-4">
                 <Link
-                  href={"/dashboard"}
+                  href={Constants.PAGES.DASHBOARD}
                   className="mx-[-0.65rem] md:mx-0 flex items-center gap-4 md:gap-3 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
                 >
                   Login
