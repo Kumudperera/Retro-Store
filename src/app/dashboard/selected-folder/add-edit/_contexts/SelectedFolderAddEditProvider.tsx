@@ -7,7 +7,7 @@ import { SelectedFolderAddEditData } from "../../@types";
 
 const initialData: SelectedFolderAddEditData = {
   selected_folder: undefined,
-  periods: []
+  all_periods: []
 };
 
 const SelectedFolderAddEditContext = createContext<{
@@ -18,7 +18,7 @@ const SelectedFolderAddEditContext = createContext<{
   dispatch: () => null,
 });
 
-export const SelectedFolderSearchProvider = ({
+export const SelectedFolderAddEditProvider = ({
   children,
 }: {
   children: ReactNode;

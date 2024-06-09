@@ -38,3 +38,31 @@ export class RouteConfig {
 export enum MasterDataAction {
   GET_ALL_EXECUTION_PERIODS = "GET_ALL_EXECUTION_PERIODS",
 }
+
+export interface HeaderParams {
+  isFileDownload?: boolean;
+  showLoading?: boolean;
+  skipAuth?: boolean;
+  message?: string;
+  showToast?: boolean;
+  isFileUpload?: boolean;
+  isMultipart?: boolean;
+}
+
+
+export type UserType = "ADMIN" | "COMPANY_USER";
+
+export type PrivilegeModule = "ADMIN" | "CLIENT" | "COMMON";
+
+export type Privilege = {
+  privilegeID: number;
+  privilegeCode: string;
+  privilegeName: string;
+  description: string;
+  privilegeCategory: string;
+  status: Status;
+};
+
+export type PrivilegeMap = {
+  [key in string]: Privilege[];
+};

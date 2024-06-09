@@ -23,19 +23,19 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { TimePicker } from "@/components/ui/time-picker";
-import { useToast } from "@/components/ui/use-toast";
+import { getAllExecutionPeriods } from "@/invokes/masterInvokesCall";
 import {
   getDefaultFormattedDateTime,
   getMomentDateFromJSDate,
 } from "@/lib/date-service";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { open } from "@tauri-apps/api/dialog";
-import { invoke } from "@tauri-apps/api/tauri";
 import { Folders, RotateCcwIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { SelectedFolderDTO, ExecutionPeriod } from "../../@types";
+import { ExecutionPeriod, SelectedFolderDTO } from "../../@types";
+import { useSelectedFolderAddEdit } from "../add-edit/_contexts/SelectedFolderAddEditProvider";
 
 const formSchema = z.object({
   selected_folder: z.string().min(1, {
@@ -48,8 +48,7 @@ const formSchema = z.object({
 });
 
 export default function SelectedFolderAddEdit() {
-  const { toast } = useToast();
-  const [periods, setPeriods] = useState<ExecutionPeriod[]>([]);
+  const { state, dispatch } = useSelectedFolderAddEdit();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: new SelectedFolderDTO(),
@@ -78,22 +77,10 @@ export default function SelectedFolderAddEdit() {
     }
   };
 
-  const getAllExecutionPeriods = async () => {
-    try {
-      const response: ExecutionPeriod[] = await invoke("get_all");
-      setPeriods(response);
-    } catch (error) {
-      toast({
-        variant: "destructive",
-        description: `${error}`,
-      });
-      console.error("Error invoking Rust command:", error);
-    }
-  };
-
   useEffect(() => {
-    getAllExecutionPeriods();
-  }, []);
+    dispatch(getAllExecutionPeriods());
+  }, [dispatch]);
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -146,8 +133,8 @@ export default function SelectedFolderAddEdit() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        {periods.length > 0 &&
-                          periods.map((executionPeriod: ExecutionPeriod) => (
+                        {state.all_periods.length > 0 &&
+                          state.all_periods.map((executionPeriod: ExecutionPeriod) => (
                             <SelectItem
                               key={executionPeriod.name}
                               value={`${executionPeriod.id}`}

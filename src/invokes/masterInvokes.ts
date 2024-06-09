@@ -1,4 +1,4 @@
-export const getAllExecutionPeriods = {
+export const MASTER_INVOKES_GET_ALL_EXECUTION_PERIODS = {
   headerParam: {
     showLoading: true,
     showToast: true,

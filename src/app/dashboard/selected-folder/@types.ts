@@ -3,14 +3,7 @@ import { ProcessExecutionPeriod } from "@/common/masterData/@types";
 
 export enum SelectedFolderAction {
   GET_ALL_EXECUTION_PERIODS = "GET_ALL_EXECUTION_PERIODS",
-  GET_COUNT = "GET_COUNT",
-  SET_PAGE_INFO = "SET_PAGE_INFO",
-  GET_PAGED_DATA = "GET_PAGED_DATA",
-  ON_RESET_SEARCH = "ON_RESET_SEARCH",
-  SET_SEARCH_DATA = "SET_SEARCH_DATA",
-  SET_VIEW_FULL_SEARCH_VIEW = "SET_VIEW_FULL_SEARCH_VIEW",
-  ON_GET_ANNOUNCEMENT_BY_ID = "ON_GET_ANNOUNCEMENT_BY_ID",
-  ON_USER_ACKNOWLEDGE = "ON_USER_ACKNOWLEDGE",
+  GET_SELECTED_FOLDER = "GET_SELECTED_FOLDER",
 }
 
 export type SelectedFoldersData = {
@@ -23,7 +16,7 @@ export type SelectedFoldersData = {
 
 export type SelectedFolderAddEditData = {
   selected_folder: SelectedFolderDTO | undefined,
-  periods: ProcessExecutionPeriod[],
+  all_periods: ProcessExecutionPeriod[],
 };
 
 class SelectedFolderDTO {
