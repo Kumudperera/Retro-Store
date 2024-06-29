@@ -3,11 +3,6 @@ package com.retroStore.model.common;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * UserTrackable must implement this interface
- *
- * @author chamara
- */
 public interface UserTrackable extends Serializable {
 
 	public Date getCreatedDate();

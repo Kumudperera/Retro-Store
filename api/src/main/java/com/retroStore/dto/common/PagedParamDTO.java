@@ -2,9 +2,6 @@ package com.retroStore.dto.common;
 
 import java.io.Serializable;
 
-/**
- * @author : chamara
- */
 public class PagedParamDTO implements Serializable {
 
     private Integer page;

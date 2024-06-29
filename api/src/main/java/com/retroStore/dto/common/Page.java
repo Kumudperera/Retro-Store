@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/**
- * @author : chamara
- */
+
 public class Page<T extends Serializable> implements Serializable {
 
     private static final long serialVersionUID = 2780804876406919746L;
