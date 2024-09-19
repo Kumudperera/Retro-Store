@@ -1,0 +1,4 @@
+
+INSERT INTO t_user
+(ID, USERNAME, USER_TYPE, FIRST_NAME, LAST_NAME, EMAIL, PASSWORD, STATUS, CREATED_BY, CREATED_DATE, VERSION)
+VALUES(1, 'SYSTEM', 'ADMIN_USER', 'TeamX', 'RetroStoreAdmin', 'retroStore.admin@gmail.com', '$2a$10$ThtooJeGAe04BZgb8CV/TuNZLJOcs8tOq/1x9CApuKBlzbKcwHzRu', 'ACT', 1, NOW(), 0);

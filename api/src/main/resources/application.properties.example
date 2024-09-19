@@ -1,0 +1,46 @@
+spring.application.name=
+
+# JPA Properties
+spring.jpa.hibernate.ddl-auto=none
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.show-sql=true
+
+spring.jpa.database=mysql
+spring.jpa.database-platform=org.hibernate.dialect.MariaDBDialect
+
+# Database Properties
+spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+spring.datasource.url=
+spring.datasource.username=
+spring.datasource.password=
+
+#flyway settings
+spring.flyway.enabled=true
+spring.flyway.locations=classpath:db/migration/structure, classpath:db/migration/data
+spring.flyway.validate-on-migrate=true
+spring.flyway.default-schema=retro_store
+
+#============================================================================
+# Security related properties
+#============================================================================
+jwt.token.access.expiration.duration.in.minutes=2880
+jwt.token.refresh.expiration.duration.in.minutes=43200
+jwt.token.issuer=teamx.retroStore
+
+private.key.der.absolute.path=
+public.key.der.absolute.path=
+public.key.pem.absolute.path=
+
+#============================================================================
+# Hazelcast cache configurations
+#============================================================================
+apps.cache.hazelcast.tcpip.enabled=true
+apps.cache.hazelcast.nodes=
+
+
+#===========================================================================
+#azure configurations
+#============================================================================
+apps.azure.storage.container.name=
+apps.azure.storage.connection.string=
+apps.azure.endpoint.url=
