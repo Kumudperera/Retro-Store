@@ -1,0 +1,31 @@
+
+
+CREATE TABLE `t_license_code` (
+    `ID` int(11) NOT NULL AUTO_INCREMENT,
+    `CODE` varchar(50) NOT NULL,
+    `PURCHASED_DATE` datetime NOT NULL,
+    `EXPIRE_DATE` datetime NOT NULL,
+    `PURCHASED_STORAGE` decimal(11,4) NOT NULL,
+    `REMAIN_STORAGE` decimal(11,4) NOT NULL,
+    `STORAGE_PACKAGE_ID` int(11) NOT NULL,
+    `OWNER_ID` int(11) NOT NULL,
+    `VALID` char(1) DEFAULT 'Y',
+    `STATUS` char(3) DEFAULT 'ACT',
+    `CREATED_BY` int(11) NOT NULL,
+    `CREATED_DATE` datetime NOT NULL,
+    `MODIFIED_BY` int(11) DEFAULT NULL,
+    `MODIFIED_DATE` datetime DEFAULT NULL,
+    `VERSION` bigint(20) NOT NULL,
+    PRIMARY KEY (`ID`),
+    UNIQUE KEY `t_license_code_code_uq` (`CODE`),
+    KEY `t_license_code_fk1` (`OWNER_ID`),
+    KEY `t_license_code_fk2` (`STORAGE_PACKAGE_ID`),
+    KEY `t_license_code_fk3` (`CREATED_BY`),
+    KEY `t_license_code_fk4` (`MODIFIED_BY`),
+    CONSTRAINT `t_license_code_fk1` FOREIGN KEY (`OWNER_ID`) REFERENCES `t_user` (`ID`),
+    CONSTRAINT `t_license_code_fk2` FOREIGN KEY (`STORAGE_PACKAGE_ID`) REFERENCES `t_storage_package` (`ID`),
+    CONSTRAINT `t_license_code_fk3` FOREIGN KEY (`CREATED_BY`) REFERENCES `t_user` (`ID`),
+    CONSTRAINT `t_license_code_fk4` FOREIGN KEY (`MODIFIED_BY`) REFERENCES `t_user` (`ID`),
+    CONSTRAINT `t_license_code_valid` CHECK (`VALID` in ('Y','N')),
+    CONSTRAINT `t_license_code_status` CHECK (`STATUS` in ('ACT','INA'))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
