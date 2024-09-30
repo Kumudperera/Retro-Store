@@ -11,9 +11,8 @@ public class Privilege implements AuditableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native")
     @Column(name = "ID")
-    private Integer ID;
+    private Integer id;
 
     @Column(name = "CODE")
     private String code;
@@ -32,12 +31,12 @@ public class Privilege implements AuditableEntity {
     @Column(name = "STATUS")
     private AppsConstants.Status status;
 
-    public Integer getID() {
-        return ID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setID(Integer ID) {
-        this.ID = ID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getCode() {
@@ -100,7 +99,7 @@ public class Privilege implements AuditableEntity {
 
     @Override
     public String getAuditSummary() {
-        return new StringBuilder().append("{").append("\"Privilege ID\":\"").append(getStringValue(ID))
+        return new StringBuilder().append("{").append("\"Privilege ID\":\"").append(getStringValue(id))
                 .append("\"").append(", \"Privilege Name\":\"").append(getStringValue(name)).append("\"")
                 .append(", \"Status\":\"").append(getStringValue(status.getDescription())).append("\"").append("}")
                 .toString();
@@ -108,7 +107,7 @@ public class Privilege implements AuditableEntity {
 
     @Override
     public String getAuditContent() {
-        return new StringBuilder().append("{").append("\"Privilege ID\":\"").append(getStringValue(ID))
+        return new StringBuilder().append("{").append("\"Privilege ID\":\"").append(getStringValue(id))
                 .append("\"").append(", \"Privilege Code\":\"").append(getStringValue(code)).append('\"')
                 .append(", \"Privilege Name\":\"").append(getStringValue(name)).append("\"")
                 .append(", \"Description\":\"").append(getStringValue(description)).append("\"")

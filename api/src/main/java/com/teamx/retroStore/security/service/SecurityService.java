@@ -56,32 +56,35 @@ public class SecurityService {
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
-    public String generatePassword(String username, String sendToEmail, boolean sendMailNotification)
-            throws AppsException {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        PairDTO<String, String> passPair = PasswordUtil.generateRandomEncodedPassword(passwordEncoder,
+    public String generatePassword(HashMap<String, String> pwRQ, CredentialsDTO credentialsDTO) throws AppsException {
+        PairDTO<String, String> passPair = PasswordUtil.generateRandomEncodedPassword(new BCryptPasswordEncoder(),
                 Integer.parseInt(appsProperties.getUserGeneratedPasswordLength()));
 
-        if (StringUtils.isNotBlank(sendToEmail) && StringUtils.isNotBlank(username) && sendMailNotification) {
+        if (pwRQ.containsKey("username") && StringUtils.isNotBlank(pwRQ.get("username")) &&
+                pwRQ.containsKey("email") && StringUtils.isNotBlank(pwRQ.get("email"))) {
             EmailSendRequest emailSendRequest = new EmailSendRequest();
             emailSendRequest.setTemplateName("credentials_template");
-            emailSendRequest.setToAddresses(Collections.singletonList(sendToEmail));
-            emailSendRequest.setSubject("RETRO_STORE Credentials");
+            emailSendRequest.setToAddresses(Collections.singletonList(pwRQ.get("email")));
+            emailSendRequest.setSubject("Retro Store Credentials");
             emailSendRequest.setSendType(DomainConstants.EmailSendType.HTML);
             emailSendRequest.setPurpose(DomainConstants.EmailPurpose.NOTIFICATION);
 
             Map<String, Object> params = new HashMap<>();
             params.put("webUrl", appsProperties.getRetroStoreWebURL());
-            params.put("username", username);
+            params.put("username", pwRQ.get("username"));
             params.put("password", passPair.getLeft());
             emailSendRequest.setParams(params);
 
-            CredentialsDTO credentialsDTO = new CredentialsDTO();
-            credentialsDTO.setID(1);
-            credentialsDTO.setUsername("SYSTEM");
-
             this.emailService.sendMailAsync(emailSendRequest, credentialsDTO);
         }
+        return passPair.getRight();
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public String generatePassword()
+            throws AppsException {
+        PairDTO<String, String> passPair = PasswordUtil.generateRandomEncodedPassword(new BCryptPasswordEncoder(),
+                Integer.parseInt(appsProperties.getUserGeneratedPasswordLength()));
         return passPair.getRight();
     }
 }

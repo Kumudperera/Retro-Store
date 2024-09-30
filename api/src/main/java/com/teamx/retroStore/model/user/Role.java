@@ -19,9 +19,8 @@ public class Role extends UserTraceableEntity implements AuditableEntity {
     @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native")
     @Column(name = "ID")
-    private Integer ID;
+    private Integer id;
 
     @Getter
     @Column(name = "NAME")
@@ -42,8 +41,8 @@ public class Role extends UserTraceableEntity implements AuditableEntity {
             inverseJoinColumns = {@JoinColumn(name = "PRIVILEGE_ID", referencedColumnName = "ID")})
     private Set<Privilege> privileges;
 
-    public void setID(Integer ID) {
-        this.ID = ID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setName(String name) {
@@ -93,7 +92,7 @@ public class Role extends UserTraceableEntity implements AuditableEntity {
     @Override
     public String getAuditSummary() {
         return new StringBuilder().append("{")
-                .append("\"Role ID\":").append(getStringValue(ID))
+                .append("\"Role ID\":").append(getStringValue(id))
                 .append(", \"Role Name\":\"").append(getStringValue(name)).append('\"')
                 .append(", \"Description\":\"").append(getStringValue(description)).append('\"')
                 .append(", \"status\":\"").append(getStringValue(status.getDescription()))
@@ -104,7 +103,7 @@ public class Role extends UserTraceableEntity implements AuditableEntity {
     @Override
     public String getAuditContent() {
         return new StringBuilder().append("{")
-                .append("\"Role ID\":").append(getStringValue(ID))
+                .append("\"Role ID\":").append(getStringValue(id))
                 .append(", \"Role Name\":\"").append(getStringValue(name)).append('\"')
                 .append(", \"Description\":\"").append(getStringValue(description)).append('\"')
                 .append(", \"Status\":\"").append(getStringValue(status.getDescription())).append('\"')

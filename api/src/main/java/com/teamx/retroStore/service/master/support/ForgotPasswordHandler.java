@@ -83,7 +83,7 @@ public class ForgotPasswordHandler extends ChangePasswordHandler {
 
     @Override
     public void validateUser() throws AppsException {
-        LOG.info("START : validate user : {}", this.passwordUpdateRQ.getCredentialsDTO().getID());
+        LOG.info("START : validate user : {}", this.passwordUpdateRQ.getCredentialsDTO().getId());
 
         PasswordUpdateDTO passwordUpdateDTO = this.passwordUpdateRQ.getPasswordUpdateDTO();
         Integer userID = this.userJDBCDao.getUserIDFromEmail(passwordUpdateDTO.getEmail());
@@ -94,7 +94,7 @@ public class ForgotPasswordHandler extends ChangePasswordHandler {
             this.user = userDao.getReferenceById(userID);
         }
 
-        LOG.info("END : validate user : {}", this.passwordUpdateRQ.getCredentialsDTO().getID());
+        LOG.info("END : validate user : {}", this.passwordUpdateRQ.getCredentialsDTO().getId());
     }
 
     @Override
@@ -102,7 +102,7 @@ public class ForgotPasswordHandler extends ChangePasswordHandler {
         LOG.info("START: User password update : {}", this.passwordUpdateRQ);
         PasswordUpdateDTO passwordUpdateDTO = this.passwordUpdateRQ.getPasswordUpdateDTO();
 
-        this.user = userDao.getReferenceById(this.user.getID());
+        this.user = userDao.getReferenceById(this.user.getId());
         this.expireTime = CalendarUtil.addMinutes(this.date, passwordResetLinkExpireTimeIn);
         this.uuid = UUID.randomUUID().toString();
 
@@ -137,7 +137,7 @@ public class ForgotPasswordHandler extends ChangePasswordHandler {
         emailSendRequest.setParams(params);
 
         CredentialsDTO credentialsDTO = new CredentialsDTO();
-        credentialsDTO.setID(1);
+        credentialsDTO.setId(1);
         credentialsDTO.setUsername("SYSTEM");
 
         this.emailService.sendMailAsync(emailSendRequest, credentialsDTO);

@@ -45,7 +45,7 @@ public class UpdatePasswordHandler extends ChangePasswordHandler {
 
     @Override
     public void validateUser() throws AppsException {
-        LOG.info("START : validate user existing password : {}", this.passwordUpdateRQ.getCredentialsDTO().getID());
+        LOG.info("START : validate user existing password : {}", this.passwordUpdateRQ.getCredentialsDTO().getId());
         PasswordUpdateDTO passwordUpdateDTO = this.passwordUpdateRQ.getPasswordUpdateDTO();
         User user = this.userDao.getReferenceById(passwordUpdateDTO.getID());
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -55,10 +55,10 @@ public class UpdatePasswordHandler extends ChangePasswordHandler {
         if (passwordEncoder.matches(oldPassword, existingPassword)) {
             passwordUpdateDTO.setNewPassword(this.generateEncodedPassword(this.passwordUpdateRQ.getPasswordUpdateDTO().getNewPassword()));
         } else {
-            LOG.error("ERROR : password mismatch : {} : {}", passwordUpdateDTO, this.passwordUpdateRQ.getCredentialsDTO().getID());
+            LOG.error("ERROR : password mismatch : {} : {}", passwordUpdateDTO, this.passwordUpdateRQ.getCredentialsDTO().getId());
             throw new AppsException(AppErrorCode.APPS_EXCEPTION_CURRENT_PASSWORD_MISMATCH);
         }
-        LOG.info("END : validate user existing password : {}", this.passwordUpdateRQ.getCredentialsDTO().getID());
+        LOG.info("END : validate user existing password : {}", this.passwordUpdateRQ.getCredentialsDTO().getId());
     }
 
     @Override
@@ -91,7 +91,7 @@ public class UpdatePasswordHandler extends ChangePasswordHandler {
         emailSendRequest.setParams(params);
 
         CredentialsDTO credentialsDTO = new CredentialsDTO();
-        credentialsDTO.setID(1);
+        credentialsDTO.setId(1);
         credentialsDTO.setUsername("SYSTEM");
 
         this.emailService.sendMailAsync(emailSendRequest, credentialsDTO);

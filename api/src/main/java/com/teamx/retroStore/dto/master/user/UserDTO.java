@@ -16,7 +16,7 @@ public class UserDTO extends UserTrackableDTO {
 
     private static final long serialVersionUID = -2812615800057620985L;
 
-    private Integer ID;
+    private Integer id;
 
     private String username;
 
@@ -76,7 +76,7 @@ public class UserDTO extends UserTrackableDTO {
     private boolean notifyPasswordGeneration;
 
     public UserDTO(UserRQ userRQ) {
-        this.ID = userRQ.getID();
+        this.id = userRQ.getId();
         this.username = userRQ.getUsername();
         this.password = userRQ.getPassword();
         this.firstName = userRQ.getFirstName();
@@ -96,7 +96,7 @@ public class UserDTO extends UserTrackableDTO {
     }
 
     public UserDTO(User user, UserLoadOptionDTO loadOptionDTO) {
-        this.ID = user.getID();
+        this.id = user.getId();
         this.username = user.getUsername();
         this.userType = user.getUserType();
         this.firstName = user.getFirstName();
@@ -108,7 +108,7 @@ public class UserDTO extends UserTrackableDTO {
         if (loadOptionDTO != null) {
             if (loadOptionDTO.isLoadRoleIDs()) {
                 for (Role role : user.getRoles()) {
-                    this.getRolesIDs().add(role.getID());
+                    this.getRolesIDs().add(role.getId());
                 }
             }
         }

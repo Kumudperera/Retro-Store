@@ -9,19 +9,18 @@ public class PrivilegeCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native")
     @Column(name = "ID")
-    private Integer ID;
+    private Integer Id;
 
-    @Column(name = "DESCRIPTION")
+    @Column(name = "CATEGORY")
     private String category;
 
-    public Integer getID() {
-        return ID;
+    public Integer getId() {
+        return Id;
     }
 
-    public void setID(Integer ID) {
-        this.ID = ID;
+    public void setId(Integer id) {
+        this.Id = id;
     }
 
     public String getCategory() {

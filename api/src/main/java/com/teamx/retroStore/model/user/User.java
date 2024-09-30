@@ -17,14 +17,13 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
-@Table(name = "T_USER")
+@Table(name = "t_user")
 public class User extends UserTraceableEntity implements AuditableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native")
     @Column(name = "ID")
-    private Integer ID;
+    private Integer id;
 
     @Column(name = "USERNAME")
     private String username;
@@ -88,7 +87,7 @@ public class User extends UserTraceableEntity implements AuditableEntity {
     @Override
     public String getAuditSummary() {
         return new StringBuilder().append("{")
-                .append("\"User ID\":\"").append(getStringValue(ID)).append("\"")
+                .append("\"User ID\":\"").append(getStringValue(id)).append("\"")
                 .append(", \"User Name\":\"").append(getStringValue(username)).append('\"')
                 .append(", \"First Name\":\"").append(getStringValue(firstName)).append('\"')
                 .append(", \"Last Name\":\"").append(getStringValue(lastName)).append('\"')
@@ -100,7 +99,7 @@ public class User extends UserTraceableEntity implements AuditableEntity {
     @Override
     public String getAuditContent() {
         StringBuilder content = new StringBuilder().append("{")
-                .append("\"User ID\":\"").append(getStringValue(ID)).append("\"")
+                .append("\"User ID\":\"").append(getStringValue(id)).append("\"")
                 .append(", \"User Name\":\"").append(getStringValue(username)).append('\"')
                 .append(", \"First Name\":\"").append(getStringValue(firstName)).append('\"')
                 .append(", \"Last Name\":\"").append(getStringValue(lastName)).append('\"')

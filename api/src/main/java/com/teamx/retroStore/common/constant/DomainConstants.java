@@ -1,15 +1,30 @@
 package com.teamx.retroStore.common.constant;
 
+import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public class DomainConstants {
 
     public enum UserType {
         ADMIN_USER, COMPANY_USER, TERMINAL_USER;
+    }
+
+    public enum StorageUnits {
+        GB;
+    }
+
+    @Getter
+    public enum StoragePackagePeriods {
+        MONTHLY(1);
+
+        StoragePackagePeriods(int noOfMonths) {
+            this.noOfMonths = noOfMonths;
+        }
+        private int noOfMonths;
+    }
+
+    public enum LicenseType {
+        PAID;
     }
 
     public enum EmailSendType {

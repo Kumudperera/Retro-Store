@@ -53,6 +53,9 @@ public class AppsProperties {
     @Value("${apps.teamx.retroStore.admin.user.username}")
     private String adminUsername;
 
+    @Value("${apps.teamx.retroStore.admin.user.id}")
+    private String adminUserId;
+
     @Value("${apps.teamx.retroStore.admin.user.email}")
     private String adminUserEmail;
 

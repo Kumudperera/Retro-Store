@@ -28,6 +28,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -55,31 +56,31 @@ public class UserService {
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = AppsException.class)
     public UserDTO saveOrUpdateUser(UserRQ userRQ, CredentialsDTO credentialsDTO) throws AppsException {
-        LOG.info("START : Add or update User : {} : {}", userRQ, credentialsDTO.getID());
+        LOG.info("START : Add or update User : {} : {}", userRQ, credentialsDTO.getId());
 
         Date date = new Date();
-        boolean isNewUser = userRQ.getID() == null;
+        boolean isNewUser = userRQ.getId() == null;
 
         User user;
 
         if (!isNewUser) {
-            user = this.userDao.getReferenceById(userRQ.getID());
-            user.setModifiedBy(credentialsDTO.getID());
+            user = this.userDao.getReferenceById(userRQ.getId());
+            user.setModifiedBy(credentialsDTO.getId());
             user.setModifiedDate(date);
         } else {
             user = new User();
-            user.setCreatedBy(credentialsDTO.getID());
+            user.setCreatedBy(credentialsDTO.getId());
             user.setCreatedDate(date);
         }
         if (isNewUser || !userRQ.getUsername().equals(user.getUsername())) {
-            if (this.userDao.findByUsernameIgnoreCase(userRQ.getUsername()) != null) {
-                LOG.error("ERROR : User Already exists : {} : {}", userRQ, credentialsDTO.getID());
+            if (this.userDao.existsByUsername(userRQ.getUsername())) {
+                LOG.error("ERROR : User Already exists : {} : {}", userRQ, credentialsDTO.getId());
                 throw new AppsException(AppErrorCode.APPS_EXCEPTION_USER_ALREADY_EXISTS);
             }
         }
         if (isNewUser || !userRQ.getEmail().equals(user.getEmail())) {
-            if (this.userDao.findByEmailIgnoreCase(userRQ.getEmail()) != null) {
-                LOG.error("ERROR : User email already exists : {} : {}, ", userRQ, credentialsDTO.getID());
+            if (this.userDao.existsByEmail(userRQ.getEmail())) {
+                LOG.error("ERROR : User email already exists : {} : {}, ", userRQ, credentialsDTO.getId());
                 throw new AppsException(AppErrorCode.APPS_EXCEPTION_EMAIL_ALREADY_EXISTS);
             }
         }
@@ -100,7 +101,10 @@ public class UserService {
 
         if (isNewUser) {
             if (StringUtils.isBlank(userRQ.getPassword())) {
-                user.setPassword(this.securityService.generatePassword(userRQ.getUsername(), userRQ.getEmail(),true));
+                HashMap<String, String> pwRQ = new HashMap<>();
+                pwRQ.put("username", userRQ.getUsername());
+                pwRQ.put("email", userRQ.getEmail());
+                user.setPassword(this.securityService.generatePassword(pwRQ, credentialsDTO));
             } else {
                 user.setPassword(PasswordUtil.generateEncodedPassword(new BCryptPasswordEncoder(), userRQ.getPassword()));
             }
@@ -109,7 +113,7 @@ public class UserService {
         this.securityService.destroyUserCache();
         user = this.userDao.saveAndFlush(user);
 
-        LOG.info("END : Add User : {} : {}", userRQ, credentialsDTO.getID());
+        LOG.info("END : Add User : {} : {}", userRQ, credentialsDTO.getId());
         UserLoadOptionDTO loadOptionDTO = new UserLoadOptionDTO();
         loadOptionDTO.loadRoleIDs();
         return new UserDTO(user, loadOptionDTO);
@@ -179,7 +183,7 @@ public class UserService {
     public UserDTO updateUserPassword(PasswordUpdateRQ passwordUpdateRQ) throws AppsException {
 
         PasswordUpdateDTO passwordUpdateDTO = passwordUpdateRQ.getPasswordUpdateDTO();
-        LOG.info("START : update user password : {} by {}", passwordUpdateDTO, passwordUpdateRQ.getCredentialsDTO().getID());
+        LOG.info("START : update user password : {} by {}", passwordUpdateDTO, passwordUpdateRQ.getCredentialsDTO().getId());
         DomainConstants.PasswordUpdateAction action = passwordUpdateDTO.getAction();
 
         ChangePasswordHandler changePasswordHandler;
@@ -212,7 +216,7 @@ public class UserService {
         changePasswordHandler.expireUserCache();
         changePasswordHandler.notifyUser();
         UserDTO userDTO = changePasswordHandler.getUserDTO();
-        LOG.info("END : update user password : {} by {}", passwordUpdateRQ.getPasswordUpdateDTO(), passwordUpdateRQ.getCredentialsDTO().getID());
+        LOG.info("END : update user password : {} by {}", passwordUpdateRQ.getPasswordUpdateDTO(), passwordUpdateRQ.getCredentialsDTO().getId());
 
         return userDTO;
     }

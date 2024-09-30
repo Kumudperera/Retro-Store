@@ -62,7 +62,7 @@ public class UserJDBCDao extends BaseJDBCDao {
         return getPagedData(SQL.toString(), params, (rs, rowNum) -> {
             UserDTO userDTO = new UserDTO();
 
-            userDTO.setID(rs.getInt("ID"));
+            userDTO.setId(rs.getInt("ID"));
             userDTO.setDisplayName(rs.getString("DISPLAY_NAME"));
             userDTO.setUsername(rs.getString("USERNAME"));
             userDTO.setEmail(rs.getString("EMAIL"));

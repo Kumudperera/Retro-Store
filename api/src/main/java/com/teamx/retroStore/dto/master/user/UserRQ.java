@@ -15,7 +15,7 @@ import java.util.*;
 public class UserRQ {
     private static final long serialVersionUID = 2373460014966807565L;
 
-    private Integer ID;
+    private Integer id;
 
     private String username;
 
@@ -39,8 +39,32 @@ public class UserRQ {
 
     }
 
+    public UserRQ(int id, UpdateRQ updateRQ) {
+        this.id = id;
+        this.username = updateRQ.getUsername();
+        this.userType = updateRQ.getUserType();
+        this.firstName = updateRQ.getFirstName();
+        this.lastName = updateRQ.getLastName();
+        this.password = updateRQ.getPassword();
+        this.email = updateRQ.getEmail();
+        this.status = updateRQ.getStatus();
+        this.addedRoles = updateRQ.getAddedRoles();
+        this.removedRoles = updateRQ.getAddedRoles();
+    }
+
+    public UserRQ(CreateRQ createRQ) {
+        this.username = createRQ.getUsername();
+        this.userType = createRQ.getUserType();
+        this.firstName = createRQ.getFirstName();
+        this.lastName = createRQ.getLastName();
+        this.password = createRQ.getPassword();
+        this.email = createRQ.getEmail();
+        this.status = createRQ.getStatus();
+        this.addedRoles = createRQ.getAddedRoles();
+    }
+
     public UserRQ(User user) {
-        this.ID = user.getID();
+        this.id = user.getId();
         this.username = user.getUsername();
         this.userType = user.getUserType();
         this.firstName = user.getFirstName();

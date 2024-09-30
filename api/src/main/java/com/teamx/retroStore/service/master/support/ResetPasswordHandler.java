@@ -51,14 +51,14 @@ public class ResetPasswordHandler extends ChangePasswordHandler {
 
     @Override
     public void validateUser() throws AppsException {
-        LOG.info("START : validate user : {}", this.passwordUpdateRQ.getCredentialsDTO().getID());
+        LOG.info("START : validate user : {}", this.passwordUpdateRQ.getCredentialsDTO().getId());
 
         PasswordUpdateDTO passwordUpdateDTO = this.passwordUpdateRQ.getPasswordUpdateDTO();
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         this.passwords = PasswordUtil.generateRandomEncodedPassword(passwordEncoder, 8);
         passwordUpdateDTO.setNewPassword(passwords.getRight());
 
-        LOG.info("END : validate user : {}", this.passwordUpdateRQ.getCredentialsDTO().getID());
+        LOG.info("END : validate user : {}", this.passwordUpdateRQ.getCredentialsDTO().getId());
     }
 
     @Override
@@ -95,7 +95,7 @@ public class ResetPasswordHandler extends ChangePasswordHandler {
         emailSendRequest.setParams(params);
 
         CredentialsDTO credentialsDTO = new CredentialsDTO();
-        credentialsDTO.setID(1);
+        credentialsDTO.setId(1);
         credentialsDTO.setUsername("SYSTEM");
 
         this.emailService.sendMailAsync(emailSendRequest, credentialsDTO);

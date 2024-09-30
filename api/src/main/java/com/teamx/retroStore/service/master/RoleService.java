@@ -40,7 +40,7 @@ public class RoleService {
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = AppsException.class)
     public RoleDTO saveOrUpdateRole(RoleDTO roleUpdateDTO, CredentialsDTO credentialsDTO) throws AppsException {
-        LOG.info("START : Role update : {} : {}", roleUpdateDTO, credentialsDTO.getID());
+        LOG.info("START : Role update : {} : {}", roleUpdateDTO, credentialsDTO.getId());
         Date date = new Date();
         Role role = null;
 
@@ -48,12 +48,12 @@ public class RoleService {
 
         if (!isNewRole) {
             role = roleDao.getReferenceById(roleUpdateDTO.getID());
-            role.setModifiedBy(credentialsDTO.getID());
+            role.setModifiedBy(credentialsDTO.getId());
             role.setModifiedDate(date);
         } else {
             role = new Role();
 
-            role.setCreatedBy(credentialsDTO.getID());
+            role.setCreatedBy(credentialsDTO.getId());
             role.setCreatedDate(date);
         }
 
@@ -75,7 +75,7 @@ public class RoleService {
         role = roleDao.saveAndFlush(role);
         this.securityService.destroyUserCache();
 
-        LOG.info("END : Role update : {} : {}", roleUpdateDTO, credentialsDTO.getID());
+        LOG.info("END : Role update : {} : {}", roleUpdateDTO, credentialsDTO.getId());
         return new RoleDTO(role);
     }
 

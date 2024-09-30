@@ -51,7 +51,7 @@ public class UserSecurityJDBCDao extends BaseJDBCDao {
                 @Nullable
                 @Override
                 public AuthDTO mapRow(ResultSet rs, int i) throws SQLException {
-                    user.setID(rs.getInt("ID"));
+                    user.setId(rs.getInt("ID"));
                     user.setUsername(rs.getString("USERNAME"));
                     user.setPassword(rs.getString("PASSWORD"));
                     user.setEmail(rs.getString("EMAIL"));

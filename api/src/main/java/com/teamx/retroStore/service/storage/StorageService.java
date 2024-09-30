@@ -43,7 +43,7 @@ public class StorageService implements EnvironmentAware {
         CredentialsDTO credentialsDTO = fileRQ.getCredentialsDTO();
         String fileName = fileRQ.getFileName();
 
-        LOG.info("START : Storing the file: {} by user {}", file, credentialsDTO.getID());
+        LOG.info("START : Storing the file: {} by user {}", file, credentialsDTO.getId());
 
         if (file == null || file.isEmpty()) {
             throw new AppsException(AppErrorCode.APPS_EXCEPTION_FILE_CANNOT_BE_EMPTY);

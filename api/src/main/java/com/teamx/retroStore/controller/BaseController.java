@@ -26,7 +26,7 @@ public class BaseController {
 
         RetroStoreUserDetails userDetails = (RetroStoreUserDetails) authentication.getPrincipal();
 
-        credentialsDTO.setID(userDetails.getUserID());
+        credentialsDTO.setId(userDetails.getUserID());
         credentialsDTO.setUsername(userDetails.getUsername());
         credentialsDTO.setRequestIpAddress(MainUtil.retrieveIPAddress(request));
         credentialsDTO.setAuthorities(userDetails.getAuthorities());

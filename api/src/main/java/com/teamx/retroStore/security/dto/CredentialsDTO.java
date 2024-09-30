@@ -13,7 +13,7 @@ public class CredentialsDTO implements Serializable {
 
     private static final long serialVersionUID = 8757355855204209313L;
 
-    private Integer ID;
+    private Integer id;
 
     private String username;
 

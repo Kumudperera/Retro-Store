@@ -65,7 +65,7 @@ public class RetroStoreUserDetails implements UserDetails {
     }
 
     public Integer getUserID() {
-        return authUser.getID();
+        return authUser.getId();
     }
 
     public Set<String> getPrivileges() {

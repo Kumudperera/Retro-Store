@@ -47,7 +47,7 @@ public class AzureStorageService {
     }
 
     public String uploadFile(MultipartFile multipartFile, String fileName, DomainConstants.UploadFileType uploadFileType, CredentialsDTO credentialsDTO) throws AppsException {
-        LOG.info("START : Azure file upload : {} by user : {}", fileName, credentialsDTO.getID());
+        LOG.info("START : Azure file upload : {} by user : {}", fileName, credentialsDTO.getId());
         String fileUrl = "";
         String filePath = "";
         try {
@@ -83,7 +83,7 @@ public class AzureStorageService {
             throw new AppsException(AppErrorCode.APPS_EXCEPTION_FILE_UPLOAD_FAILED);
         }
 
-        LOG.info("END : Azure file upload : {} by user : {}", fileName, credentialsDTO.getID());
+        LOG.info("END : Azure file upload : {} by user : {}", fileName, credentialsDTO.getId());
         return fileUrl;
     }
 
@@ -126,7 +126,7 @@ public class AzureStorageService {
     }
     
     public byte[] downloadFile(String key, CredentialsDTO credentialsDTO) throws AppsException {
-        LOG.info("START : Azure file download : {} by user : {}", key, credentialsDTO.getID());
+        LOG.info("START : Azure file download : {} by user : {}", key, credentialsDTO.getId());
         byte[] bytes;
         try {
             BlobClient client = blobContainerClient.getBlobClient(key);
@@ -134,10 +134,10 @@ public class AzureStorageService {
             client.downloadStream(outputStream);
             bytes = outputStream.toByteArray();
         } catch (Exception e) {
-            LOG.error("Error : Azure file download : {} by user : {} failed", key, credentialsDTO.getID(), e);
+            LOG.error("Error : Azure file download : {} by user : {} failed", key, credentialsDTO.getId(), e);
             throw new AppsException(AppErrorCode.APPS_EXCEPTION_FILE_DOWNLOAD_FAILED, e);
         }
-        LOG.info("END : Azure file download : {} by user : {}", key, credentialsDTO.getID());
+        LOG.info("END : Azure file download : {} by user : {}", key, credentialsDTO.getId());
 
         return bytes;
     }

@@ -39,13 +39,13 @@ public class RoleDTO implements Serializable {
     }
 
     public RoleDTO(Role role) {
-        this.ID = role.getID();
+        this.ID = role.getId();
         this.name = role.getName();
         this.description = role.getDescription();
         this.status = role.getStatus();
 
         for (Privilege privilege : role.getPrivileges()) {
-            this.getPrivileges().add(privilege.getID());
+            this.getPrivileges().add(privilege.getId());
         }
     }
 

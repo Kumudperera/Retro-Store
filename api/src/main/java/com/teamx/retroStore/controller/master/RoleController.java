@@ -34,11 +34,11 @@ public class RoleController extends BaseController {
     public ResponseEntity<Page<RoleDTO>> getPagedRoles(@RequestBody RoleSearchRQ roleSearchRQ) throws Exception {
 
         CredentialsDTO credentialsDTO = getCredentialsDTO();
-        LOG.info("START : Search roles : {} , user {}", roleSearchRQ, credentialsDTO.getID());
+        LOG.info("START : Search roles : {} , user {}", roleSearchRQ, credentialsDTO.getId());
 
         Page<RoleDTO> pagedRoles = this.roleService.getPagedRoles(roleSearchRQ);
 
-        LOG.info("END : Search roles : {} , user {}", roleSearchRQ, credentialsDTO.getID());
+        LOG.info("END : Search roles : {} , user {}", roleSearchRQ, credentialsDTO.getId());
 
         return new ResponseEntity<>(pagedRoles, HttpStatus.OK);
     }
@@ -49,11 +49,11 @@ public class RoleController extends BaseController {
 
         CredentialsDTO credentialsDTO = getCredentialsDTO();
 
-        LOG.info("START : get role : {}, user {} ", roleID, credentialsDTO.getID());
+        LOG.info("START : get role : {}, user {} ", roleID, credentialsDTO.getId());
 
         RoleDTO roleUpdateDTO = this.roleService.getRoleUpdateDTO(roleID);
 
-        LOG.info("END : get role : {}, user {} ", roleID, credentialsDTO.getID());
+        LOG.info("END : get role : {}, user {} ", roleID, credentialsDTO.getId());
 
         return new ResponseEntity<>(roleUpdateDTO, HttpStatus.OK);
     }
@@ -64,11 +64,11 @@ public class RoleController extends BaseController {
 
         CredentialsDTO credentialsDTO = getCredentialsDTO();
 
-        LOG.info("START : save/update role : {}, user {}", roleUpdateDTO, credentialsDTO.getID());
+        LOG.info("START : save/update role : {}, user {}", roleUpdateDTO, credentialsDTO.getId());
 
         RoleDTO roleUpdateDTOResponse = this.roleService.saveOrUpdateRole(roleUpdateDTO, credentialsDTO);
 
-        LOG.info("END : save/update role : {}, user {}", roleUpdateDTO, credentialsDTO.getID());
+        LOG.info("END : save/update role : {}, user {}", roleUpdateDTO, credentialsDTO.getId());
 
         return new ResponseEntity<>(roleUpdateDTOResponse, HttpStatus.OK);
     }
@@ -79,11 +79,11 @@ public class RoleController extends BaseController {
 
         CredentialsDTO credentialsDTO = getCredentialsDTO();
 
-        LOG.info("START : get System Privileges for user {}", credentialsDTO.getID());
+        LOG.info("START : get System Privileges for user {}", credentialsDTO.getId());
 
         Map<String, List<PrivilegeDTO>> privileges = this.roleService.getCategoryWisePrivileges(AppsConstants.Status.ACT);
 
-        LOG.info("END : System Privileges for user {}", credentialsDTO.getID());
+        LOG.info("END : System Privileges for user {}", credentialsDTO.getId());
 
         return new ResponseEntity<>(privileges, HttpStatus.OK);
     }
@@ -97,11 +97,11 @@ public class RoleController extends BaseController {
 
         CredentialsDTO credentialsDTO = getCredentialsDTO();
 
-        LOG.info("START : get roles by user {}", credentialsDTO.getID());
+        LOG.info("START : get roles by user {}", credentialsDTO.getId());
 
         List<RoleDTO> roles = this.roleService.getRoles(null);
 
-        LOG.info("END : get roles by user {}", credentialsDTO.getID());
+        LOG.info("END : get roles by user {}", credentialsDTO.getId());
 
         return new ResponseEntity<>(roles, HttpStatus.OK);
     }
@@ -112,11 +112,11 @@ public class RoleController extends BaseController {
 
         CredentialsDTO credentialsDTO = getCredentialsDTO();
 
-        LOG.info("START : Get system roles by user {}", credentialsDTO.getID());
+        LOG.info("START : Get system roles by user {}", credentialsDTO.getId());
 
         List<RoleDTO> roles = this.roleService.getSystemRoles();
 
-        LOG.info("END : Get system roles by user {}", credentialsDTO.getID());
+        LOG.info("END : Get system roles by user {}", credentialsDTO.getId());
 
         return new ResponseEntity<>(roles, HttpStatus.OK);
     }
